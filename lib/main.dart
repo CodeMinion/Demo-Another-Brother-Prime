@@ -39,6 +39,7 @@ class MyApp extends StatelessWidget {
       home: PageView(children: [
         BleRjPrintPage(title: 'RJ-4250WB BLE Sample'),
         QlBluetoothPrintPage(title: 'QL-1110NWB Bluetooth Sample'),
+        PtChainPrintBluetoothPrintPage(title: 'PT-P910BT BT Chain Sample'),
         WifiPrintPage(title: 'PJ-773 WiFi Sample'),
         BleRjCustomPaperPrintPage(title: 'RJ-4250WB Bin Sample'),
         TypeBbluetoothPrintPage(title: 'RJ-3035B BT Sample'),
@@ -454,6 +455,145 @@ class _QlBluetoothPrintPageState extends State<QlBluetoothPrintPage> {
     printer.printImage(await loadImage('assets/brother_hack.png'));
 
   }
+  @override
+  Widget build(BuildContext context) {
+
+
+    // This method is rerun every time setState is called, for instance as done
+    // by the _incrementCounter method above.
+    //
+    // The Flutter framework has been optimized to make rerunning build methods
+    // fast, so that you can just rebuild anything that needs updating rather
+    // than having to individually change instances of widgets.
+    return Scaffold(
+      appBar: AppBar(
+        // Here we take the value from the MyHomePage object that was created by
+        // the App.build method, and use it to set our appbar title.
+        title: Text(widget.title),
+      ),
+      body: Center(
+        // Center is a layout widget. It takes a single child and positions it
+        // in the middle of the parent.
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text("Don't forget to grant permissions to your app in Settings.", textAlign: TextAlign.center,),
+            ),
+            Image(image: AssetImage('assets/brother_hack.png'))
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => print(context),
+        tooltip: 'Print',
+        child: Icon(Icons.print),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+
+  Future<ui.Image> loadImage(String assetPath) async {
+    final ByteData img = await rootBundle.load(assetPath);
+    final Completer<ui.Image> completer = new Completer();
+    ui.decodeImageFromList(new Uint8List.view(img.buffer), (ui.Image img) {
+      return completer.complete(img);
+    });
+    return completer.future;
+  }
+}
+
+///
+/// Sample on how to chain print in the PT series printer
+///
+class PtChainPrintBluetoothPrintPage extends StatefulWidget {
+  const PtChainPrintBluetoothPrintPage({Key? key, required this.title}) : super(key: key);
+
+  // This widget is the home page of your application. It is stateful, meaning
+  // that it has a State object (defined below) that contains fields that affect
+  // how it looks.
+
+  // This class is the configuration for the state. It holds the values (in this
+  // case the title) provided by the parent (in this case the App widget) and
+  // used by the build method of the State. Fields in a Widget subclass are
+  // always marked "final".
+
+  final String title;
+
+  @override
+  _PtChainPrintBluetoothPrintPage createState() => _PtChainPrintBluetoothPrintPage();
+}
+
+class _PtChainPrintBluetoothPrintPage extends State<PtChainPrintBluetoothPrintPage> {
+
+  bool _error = false;
+
+  void print(BuildContext context) async {
+
+    //////////////////////////////////////////////////
+    /// Request the Storage permissions required by
+    /// another_brother to print.
+    //////////////////////////////////////////////////
+    if (!await Permission.storage.request().isGranted) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text("Access to storage is needed in order print."),
+        ),
+      ));
+      return;
+    }
+
+    var printer = new Printer();
+    var printInfo = PrinterInfo();
+    printInfo.printerModel = Model.PT_P910BT;
+    printInfo.printMode = PrintMode.FIT_TO_PAGE;
+    // Disable cutting after every page
+    printInfo.isAutoCut = false;
+    // Disable end cut.
+    printInfo.isCutAtEnd = false;
+    // Allow for cutting mid page
+    printInfo.isHalfCut = true;
+    printInfo.port = Port.BLUETOOTH;
+    // Set the label type.
+    printInfo.labelNameIndex = PT.ordinalFromID(PT.W36.getId());
+
+    // Set the printer info so we can use the SDK to get the printers.
+    await printer.setPrinterInfo(printInfo);
+
+    // Get a list of printers with my model available in the network.
+    List<BluetoothPrinter> printers = await printer.getBluetoothPrinters([Model.PT_P910BT.getName()]);
+
+    if (printers.isEmpty) {
+      // Show a message if no printers are found.
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text("No paired printers found on your device."),
+        ),
+      ));
+
+      return;
+    }
+    // Get the IP Address from the first printer found.
+    printInfo.macAddress = printers.single.macAddress;
+
+    printer.setPrinterInfo(printInfo);
+    int totalLabelsToPrint = 3;
+    // We purposely print n-1 labels because we'll use the last print to cut the tape
+    for (int i = 0; i < totalLabelsToPrint -1; i ++) {
+      await printer.printImage(await loadImage('assets/brother_hack.png'));
+    }
+
+    // Last print
+    printInfo.isAutoCut = false;
+    printInfo.isCutAtEnd = true;
+    printInfo.isHalfCut = false;
+    await printer.setPrinterInfo(printInfo);
+    await printer.printImage(await loadImage('assets/brother_hack.png'));
+
+  }
+
   @override
   Widget build(BuildContext context) {
 

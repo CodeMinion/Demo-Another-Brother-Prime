@@ -74,5 +74,7 @@
         		<string>com.issc.datapath</string>
         	</array>
         	<!-- End Another Brother Section -->
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
 </dict>
 </plist>
