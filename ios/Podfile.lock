@@ -1,44 +1,10 @@
 PODS:
   - another_brother (0.0.1):
-    - BRLMPrinterKit
+    - BRLMPrinterKit_AB
     - BROTHERSDK
     - Flutter
-  - BRLMPrinterKit (4.0.2.1)
-  - BROTHERSDK (0.1.0)
-  - DKImagePickerController/Core (4.3.3):
-    - DKImagePickerController/ImageDataManager
-    - DKImagePickerController/Resource
-  - DKImagePickerController/ImageDataManager (4.3.3)
-  - DKImagePickerController/PhotoGallery (4.3.3):
-    - DKImagePickerController/Core
-    - DKPhotoGallery
-  - DKImagePickerController/Resource (4.3.3)
-  - DKPhotoGallery (0.0.17):
-    - DKPhotoGallery/Core (= 0.0.17)
-    - DKPhotoGallery/Model (= 0.0.17)
-    - DKPhotoGallery/Preview (= 0.0.17)
-    - DKPhotoGallery/Resource (= 0.0.17)
-    - SDWebImage
-    - SwiftyGif
-  - DKPhotoGallery/Core (0.0.17):
-    - DKPhotoGallery/Model
-    - DKPhotoGallery/Preview
-    - SDWebImage
-    - SwiftyGif
-  - DKPhotoGallery/Model (0.0.17):
-    - SDWebImage
-    - SwiftyGif
-  - DKPhotoGallery/Preview (0.0.17):
-    - DKPhotoGallery/Model
-    - DKPhotoGallery/Resource
-    - SDWebImage
-    - SwiftyGif
-  - DKPhotoGallery/Resource (0.0.17):
-    - SDWebImage
-    - SwiftyGif
-  - file_picker (0.0.1):
-    - DKImagePickerController/PhotoGallery
-    - Flutter
+  - BRLMPrinterKit_AB (4.6.4.3)
+  - BROTHERSDK (0.2.1)
   - Flutter (1.0.0)
   - flutter_blue_plus (0.0.1):
     - Flutter
@@ -48,60 +14,44 @@ PODS:
     - Protobuf (~> 3.11)
   - path_provider_ios (0.0.1):
     - Flutter
-  - "permission_handler (5.1.0+2)":
+  - permission_handler_apple (9.0.4):
     - Flutter
-  - Protobuf (3.20.0)
-  - SDWebImage (5.12.5):
-    - SDWebImage/Core (= 5.12.5)
-  - SDWebImage/Core (5.12.5)
-  - SwiftyGif (5.4.3)
+  - Protobuf (3.23.4)
 
 DEPENDENCIES:
   - another_brother (from `.symlinks/plugins/another_brother/ios`)
-  - file_picker (from `.symlinks/plugins/file_picker/ios`)
   - Flutter (from `Flutter`)
   - flutter_blue_plus (from `.symlinks/plugins/flutter_blue_plus/ios`)
   - path_provider_ios (from `.symlinks/plugins/path_provider_ios/ios`)
-  - permission_handler (from `.symlinks/plugins/permission_handler/ios`)
+  - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
 
 SPEC REPOS:
   trunk:
-    - BRLMPrinterKit
+    - BRLMPrinterKit_AB
     - BROTHERSDK
-    - DKImagePickerController
-    - DKPhotoGallery
     - Protobuf
-    - SDWebImage
-    - SwiftyGif
 
 EXTERNAL SOURCES:
   another_brother:
     :path: ".symlinks/plugins/another_brother/ios"
-  file_picker:
-    :path: ".symlinks/plugins/file_picker/ios"
   Flutter:
     :path: Flutter
   flutter_blue_plus:
     :path: ".symlinks/plugins/flutter_blue_plus/ios"
   path_provider_ios:
     :path: ".symlinks/plugins/path_provider_ios/ios"
-  permission_handler:
-    :path: ".symlinks/plugins/permission_handler/ios"
+  permission_handler_apple:
+    :path: ".symlinks/plugins/permission_handler_apple/ios"
 
 SPEC CHECKSUMS:
-  another_brother: 14a7865809340ab48049fb9861f57bb5151c787c
-  BRLMPrinterKit: 79ca593275bdae5309c8ee93674df2e5177a1b52
-  BROTHERSDK: ea7f08981c315f742fc833d857dc85cb324ab195
-  DKImagePickerController: 72fd378f244cef3d27288e0aebf217a4467e4012
-  DKPhotoGallery: fdfad5125a9fdda9cc57df834d49df790dbb4179
-  file_picker: 817ab1d8cd2da9d2da412a417162deee3500fc95
+  another_brother: 3a29581be543c53dc1d1210ccf5eb34a02f4dc74
+  BRLMPrinterKit_AB: 155f2fe28e16833bd3b0dbe335fe470179bb0163
+  BROTHERSDK: fd1148e2c5960155384c79e6f80593bc3567aee1
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   flutter_blue_plus: 6787777145d615de01828f3a9fa423c3c702f0b3
   path_provider_ios: 14f3d2fd28c4fdb42f44e0f751d12861c43cee02
-  permission_handler: ccb20a9fad0ee9b1314a52b70b76b473c5f8dab0
-  Protobuf: 66e2f3b26a35e4cc379831f4ced538274ee4b923
-  SDWebImage: 0905f1b7760fc8ac4198cae0036600d67478751e
-  SwiftyGif: 6c3eafd0ce693cad58bb63d2b2fb9bacb8552780
+  permission_handler_apple: 44366e37eaf29454a1e7b1b7d736c2cceaeb17ce
+  Protobuf: c6bc59bbab3d38a71c67f62d7cb7ca8f8ea4eca1
 
 PODFILE CHECKSUM: ef19549a9bc3046e7bb7d2fab4d021637c0c58a3
 

@@ -452,7 +452,7 @@ class _QlBluetoothPrintPageState extends State<QlBluetoothPrintPage> {
     printInfo.macAddress = printers.single.macAddress;
 
     printer.setPrinterInfo(printInfo);
-    printer.printImage(await loadImage('assets/brother_hack.png'));
+    PrinterStatus status = await printer.printImage(await loadImage('assets/brother_hack.png'));
 
   }
   @override
